@@ -70,10 +70,13 @@ public class Robot extends TimedRobot {
     }
 
     // get sensor position
-    double sensorPosition = encoder.get() * kDriveTick2Feet;
-
+    // double sensorPosition = encoder.get() * kDriveTick2Feet;
+    // Don't need it, use raw sensor position (cz I'm lazy to do the angle and all those stuff and we don't need to track distances)
+    // I choose to get the targe angle measurement by hand instead of calculating the angles.
+    // 
+    double rawEncoderPosition; // use raw encoder position instead of the calculated
     // calculations
-    double error = setpoint - sensorPosition;
+    double error = setpoint - rawEncoderPosition;
     double dt = Timer.getFPGATimestamp() - lastTimestamp;
 
     if (Math.abs(error) < iLimit) {
